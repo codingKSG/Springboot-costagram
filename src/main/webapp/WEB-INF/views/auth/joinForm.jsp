@@ -1,45 +1,46 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photogram</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photogram</title>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 </head>
 
 <body>
-    <div class="container">
-        <main>
-            <section class="login">
- 
-                <article class="login__form__container">
-                    <div class="login__form">
-                        <h1><img src="/images/logo.jpg" alt=""></h1>
-                     
-                        <div class="login__input">
-                            <input type="text" name="id" placeholder="휴대폰 번호 또는 이메일 주소">
-                            <input type="password" name="password" id="password" placeholder="성명">
-                            <input type="password" name="password" id="password" placeholder="사용자이름">
-                            <input type="password" name="password" id="password" placeholder="비밀번호">
-                            <button>가입</button>
-                        </div>
+	<div class="container">
+		<main>
+			<section class="login">
 
-                 
-                    </div>
-                    <div class="login__register">
-                        <span>계정이 있으신가요?</span>
-                        <a href="/auth/loginForm">로그인</a>
-                    </div>
-              
-                </article>
-            </section>
-        </main>
-    </div>
+				<article class="login__form__container">
+					<div class="login__form">
+						<h1>
+							<img src="/images/logo.jpg" alt="">
+						</h1>
+
+						<form class="login__input" action="/auth/join" method="post">
+							<input type="text" name="username" placeholder="Username">
+							<input type="password" name="password" placeholder="Password">
+							<input type="email" name="email" placeholder="Email">
+							<input type="text" name="name" placeholder="Name">
+							<button>가입</button>
+						</form>
+
+
+					</div>
+					<div class="login__register">
+						<span>계정이 있으신가요?</span>
+						<a href="/auth/loginForm">로그인</a>
+					</div>
+
+				</article>
+			</section>
+		</main>
+	</div>
 </body>
 
 </html>
