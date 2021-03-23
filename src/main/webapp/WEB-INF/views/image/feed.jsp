@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="../layout/header.jsp"%>
 
@@ -17,7 +16,6 @@
                             </svg>
 					</div>
 					<div>Jxxva._.SP</div>
-
 				</div>
 				<div class="sl__item__img">
 					<img src="/images/home3.jpg" alt="">
@@ -28,6 +26,8 @@
 							<i class="far fa-heart"></i>
 						</button>
 					</div>
+					<div class="sl__item__contents__tag">#운동 #공부 #음식</div>
+
 					<div class="sl__item__contents__content">
 						<p>내용내용내용내용</p>
 					</div>
@@ -57,6 +57,8 @@
 							<i class="far fa-heart"></i>
 						</button>
 					</div>
+					<div class="sl__item__contents__tag">#운동 #공부 #음식</div>
+
 					<div class="sl__item__contents__content">
 						<p>내용내용내용내용</p>
 					</div>

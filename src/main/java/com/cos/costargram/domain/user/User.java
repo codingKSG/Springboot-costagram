@@ -41,7 +41,7 @@ public class User {
 	private String phone; // 휴대전화
 	private String gender; // 성별
 	
-	private String profileImage; // 프로필 이미지
+	private String profileImageUrl; // 프로필 이미지
 	private String provider; // 제공자 Google, FaceBook, Naver..
 	
 	private String role; // USER, ADMIN

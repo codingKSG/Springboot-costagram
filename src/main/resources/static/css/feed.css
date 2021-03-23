@@ -126,6 +126,18 @@
   .sl__item__contents__content {
   padding: 5px 15px;
 }
+
+.main
+  .container
+  .story-list
+  .story-list__item
+  .sl__item__contents
+  .sl__item__contents__tag {
+  padding: 5px 15px;
+  color: #0080ff;
+  font-size: 14px;
+}
+
 .main
   .container
   .story-list
