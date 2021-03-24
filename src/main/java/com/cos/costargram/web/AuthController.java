@@ -32,6 +32,6 @@ public class AuthController {
 	@PostMapping("/auth/join" )
 	public @ResponseBody String join(UserJoinReqDto userJoinReqDto) {
 		authService.회원가입(userJoinReqDto);
-		return Script.href("성공", "/auth/loginForm");
+		return Script.href("회원 가입 성공", "auth/loginForm");
 	}
 }
