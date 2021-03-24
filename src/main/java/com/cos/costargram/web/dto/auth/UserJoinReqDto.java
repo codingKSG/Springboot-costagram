@@ -1,4 +1,4 @@
-package com.cos.costargram.web.auth.dto;
+package com.cos.costargram.web.dto.auth;
 
 import com.cos.costargram.domain.user.User;
 
