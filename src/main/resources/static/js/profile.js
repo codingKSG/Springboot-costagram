@@ -20,7 +20,7 @@ document.querySelector("#subscribeBtn").onclick = (e) => {
 		
 		res.data.forEach((u)=>{
 			console.log(u);
-			let item = makeSubScriveInfo(u.toUser.username);
+			let item = makeSubScriveInfo(u.toUser.username, u.toUser.id);
 			$("#follow_list").append(item);
 		});
 		
@@ -29,13 +29,14 @@ document.querySelector("#subscribeBtn").onclick = (e) => {
 	});
 };
 
-function makeSubScriveInfo(username) {
+function makeSubScriveInfo(username, userId) {
 	let item = `<div class="follower__item">`;
 	item += `<div class="follower__img">`;
 	item += `<img src="/images/profile.jpeg" alt=""/>`;
 	item += `</div>`;
 	item += `<div class="follower__text">`;
-	item += `<h2>${username}</h2>`;
+	item += `<a href="/user/${userId}" class="follower__item__href">`;
+	item += `<h2>${username}</h2></a>`;
 	item += `</div>`;
 	item += `<div class="follower__btn">`;
 	item += `<button onclick = "clickFollow(this)"> 구독취소</button>`;

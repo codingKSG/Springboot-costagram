@@ -359,6 +359,13 @@
   height: 70px;
   padding: 10px;
 }
+
+.modal-follow .follower .follower-list .follower__item .follower__item__href {
+  color: black;
+}
+
+
+
 .modal-follow .follower .follower-list .follower__item .follower__img {
   width: 80px;
   text-align: center;
