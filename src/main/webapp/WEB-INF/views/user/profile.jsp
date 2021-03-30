@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="../layout/header.jsp"%>
 
@@ -10,8 +9,7 @@
 
 		<!--유저이미지-->
 		<div class="profile-left">
-			<div class="profile-img-wrap story-border"
-				onclick="popup('.modal-image')">
+			<div class="profile-img-wrap story-border" onclick="popup('.modal-image')">
 				<img src="/images/profile.jpeg" alt="">
 				<svg viewbox="0 0 110 110">
                         <circle cx="55" cy="55" r="53" />
@@ -49,8 +47,19 @@
 			</div>
 			<div class="follow">
 				<ul>
-					<li><a href="">게시물<span>${dto.imageCount}</span></a></li>
-					<li><a href="" id="subscribeBtn">구독정보<span>${dto.followCount}</span></a></li>
+					<li>
+						<a href="">
+							게시물
+							<span>${dto.imageCount}</span>
+						</a>
+					</li>
+					<li>
+						<a href="" id="subscribeBtn">
+							<input type="hidden" id="userId" value="${dto.user.id}" />
+							구독정보
+							<span>${dto.followCount}</span>
+						</a>
+					</li>
 				</ul>
 			</div>
 			<div class="state">
@@ -75,9 +84,14 @@
 				<!--아이템들-->
 				<c:forEach var="image" items="${dto.user.images}">
 					<div class="img-box">
-						<a href=""><img src="/images/profile.jpeg" alt=""></a>
+						<a href="">
+							<img src="/upload/${image.postImageUrl}" alt="">
+						</a>
 						<div class="comment">
-							<a href="#a" class=""><i class="fas fa-heart"></i><span>${image.likeCount}</span></a>
+							<a href="#a" class="">
+								<i class="fas fa-heart"></i>
+								<span>${image.likeCount}</span>
+							</a>
 						</div>
 					</div>
 				</c:forEach>
@@ -90,8 +104,7 @@
 <!--로그아웃, 회원정보변경 모달-->
 <div class="modal-info">
 	<div class="modal">
-		<button onclick="location.href='/user/1/profileSetting'">회원정보
-			변경</button>
+		<button onclick="location.href='/user/1/profileSetting'">회원정보 변경</button>
 		<button onclick="location.href='/logout'">로그아웃</button>
 		<button onclick="closePopup('.modal-info')">취소</button>
 	</div>
@@ -108,49 +121,27 @@
 </div>
 <!--프로필사진 바꾸기 모달end-->
 
-<!--팔로워 모달-->
+<!--팔로우 모달-->
 <div class="modal-follow">
-	<!--팔로워 박스-->
+	<!--팔로우 박스-->
 	<div class="follower">
-		<!--팔로워 헤더-->
+		<!--팔로우 헤더-->
 		<div class="follower-header">
 			<span>구독정보</span>
 			<button onclick="closeFollow()">
 				<i class="fas fa-times"></i>
 			</button>
 		</div>
-		<!--팔로워 헤더end-->
+		<!--팔로우 헤더end-->
 
-		<!--팔로워 리스트-->
-		<div class="follower-list">
-			<div class="follower__item">
-				<div class="follower__img">
-					<img src="/images/profile.jpeg" alt="">
-				</div>
-				<div class="follower__text">
-					<h2>아이디</h2>
-				</div>
-				<div class="follower__btn">
-					<button onclick="clickFollow(this)">구독취소</button>
-				</div>
-			</div>
-			<div class="follower__item">
-				<div class="follower__img">
-					<img src="/images/profile.jpeg" alt="">
-				</div>
-				<div class="follower__text">
-					<h2>아이디</h2>
-				</div>
-				<div class="follower__btn">
-					<button onclick="clickFollow(this)">구독취소</button>
-				</div>
-			</div>
-		</div>
-		<!--팔로워 리스트end-->
+		<!--팔로우 리스트-->
+		<div class="follower-list" id="follow_list"></div>
+		<!--팔로우 리스트end-->
 	</div>
-	<!--팔로워 박스end-->
+	<!--팔로우 박스end-->
 </div>
-<!--팔로워 모달end-->
+<!--팔로우 모달end-->
+
 
 <script src="/js/profile.js"></script>
 

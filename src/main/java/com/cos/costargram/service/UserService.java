@@ -1,9 +1,12 @@
 package com.cos.costargram.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cos.costargram.domain.follow.Follow;
 import com.cos.costargram.domain.follow.FollowRepository;
 import com.cos.costargram.domain.user.User;
 import com.cos.costargram.domain.user.UserRepository;
@@ -22,13 +25,7 @@ public class UserService {
 	public UserProfileReqDto 회원프로필(int userId, int principalId) {
 
 		UserProfileReqDto userProfileReqDto = new UserProfileReqDto();
-		int followValue = followRepository.mFollowState(userId, principalId);
-		boolean followState;
-
-		if (followValue == 0)
-			followState = false;
-		else
-			followState = true;
+		int followState = followRepository.mFollowState(principalId, userId);
 
 		int followCount = followRepository.mFollowCount(userId);
 
@@ -36,11 +33,12 @@ public class UserService {
 			return new IllegalArgumentException();
 		});
 
-		userProfileReqDto.setFollowState(followState);
+		userProfileReqDto.setFollowState(followState == 1);
 		userProfileReqDto.setFollowCount(followCount);
 		userProfileReqDto.setImageCount(userEntity.getImages().size());
 		userProfileReqDto.setUser(userEntity);
 
 		return userProfileReqDto;
 	}
+	
 }

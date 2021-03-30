@@ -8,11 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.cos.costargram.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,13 +30,15 @@ public class Follow {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@JsonIgnoreProperties({"images"})
 	@JoinColumn(name="fromUserId")
 	@ManyToOne
 	private User fromUser; // ~~로 부터
 	
+	@JsonIgnoreProperties({"images"})
 	@JoinColumn(name="toUserId")
 	@ManyToOne
-	private User toUset; // ~~를
+	private User toUser; // ~~를
 	
 	@CreationTimestamp
 	private Timestamp createDate;
