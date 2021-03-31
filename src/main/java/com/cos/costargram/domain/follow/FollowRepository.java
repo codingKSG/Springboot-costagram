@@ -24,6 +24,4 @@ public interface FollowRepository extends JpaRepository<Follow, Integer>{
 	@Query(value="SELECT COUNT(*) FROM follow WHERE fromUserId = :principalId AND toUserId = :userId", nativeQuery = true)
 	int mFollowState(int principalId, int userId);
 	
-	List<Follow> findByFromUserId(int userId);
-	
 }
