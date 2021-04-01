@@ -15,7 +15,7 @@ function likeOrUnLike(imageId) {
 			_buttonI.classList.remove("far");
 			let likeCountStr = $(`#like_count_${imageId}`).text();
 			let likeCount = Number(likeCountStr) + 1;
-			$(`#like-count-${imageId}`).text(likeCount);
+			$(`#like_count_${imageId}`).text(likeCount);
 		});
 
 	} else {
@@ -31,7 +31,7 @@ function likeOrUnLike(imageId) {
 			_buttonI.classList.add("far");
 			let likeCountStr = $(`#like_count_${imageId}`).text();
 			let likeCount = Number(likeCountStr) - 1;
-			$(`#like-count-${imageId}`).text(likeCount);
+			$(`#like_count_${imageId}`).text(likeCount);
 		});
 	}
 }

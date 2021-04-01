@@ -36,6 +36,11 @@ public class UserService {
 		userProfileReqDto.setFollowState(followState == 1);
 		userProfileReqDto.setFollowCount(followCount);
 		userProfileReqDto.setImageCount(userEntity.getImages().size());
+		
+		userEntity.getImages().forEach((image)->{
+			image.setLikeCount(image.getLikes().size());
+		});
+		
 		userProfileReqDto.setUser(userEntity);
 
 		return userProfileReqDto;
