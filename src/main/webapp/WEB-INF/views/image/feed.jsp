@@ -24,26 +24,45 @@
 
 					<!--게시물이미지 영역-->
 					<div class="sl__item__img">
-						<img src="/images/home3.jpg" alt="" />
+						<img src="/upload/${image.postImageUrl}" alt="" />
 					</div>
 
 					<!--게시물 내용 + 댓글 영역-->
 					<div class="sl__item__contents">
 						<!-- 하트모양 버튼 박스 -->
 						<div class="sl__item__contents__icon">
-							<button onclick="clickBtn()">
-								<i class="far fa-heart"></i>
-							</button>
+
+							<c:choose>
+								<c:when test="${image.likeState}">
+									<button onclick="likeOrUnLike(${image.id})">
+										<i class="fas fa-heart active"></i>
+									</button>
+								</c:when>
+								<c:otherwise>
+									<button onclick="likeOrUnLike(${image.id})">
+										<i class="far fa-heart"></i>
+									</button>
+								</c:otherwise>
+							</c:choose>
+
+
 						</div>
 						<!-- 하트모양 버튼 박스 end -->
 
 						<!--좋아요-->
-						<span class="like"><b>1</b>likes</span>
+						<span class="like">
+							<b id="like_count_${image.id}">${image.likeCount}</b>
+							likes
+						</span>
 						<!--좋아요end-->
 
 						<!--태그박스-->
 						<div class="sl__item__contents__tags">
-							<p>#운동 #공부 #음식</p>
+							<p>
+								<c:forEach var="tag" items="${image.tags}">
+								#${tag.name} 
+							</c:forEach>
+							</p>
 						</div>
 						<!--태그박스end-->
 
@@ -52,12 +71,10 @@
 							<p>${image.caption}</p>
 						</div>
 						<!--게시글내용end-->
-						
+
 						<!-- 댓글 들어오는 박스 -->
 						<div>
-							<div class="sl__item__contents__comment">
-								
-							</div>
+							<div class="sl__item__contents__comment"></div>
 						</div>
 						<!-- 댓글 들어오는 박스end -->
 

@@ -20,7 +20,7 @@
 
 		<!--유저정보 및 사진등록 구독하기-->
 		<div class="profile-right">
-			<div class="name-group" id="follow-${dto.user.id}">
+			<div class="name-group">
 				<h2>${dto.user.username}</h2>
 
 
@@ -35,10 +35,10 @@
 					<c:otherwise>
 						<c:choose>
 							<c:when test="${dto.followState}">
-								<button class="cta blue" onclick="followOrUnFollow(${dto.user.id})">구독취소</button>
+								<button class="cta blue" onclick="followOrUnFollowProfile(${dto.user.id})" id="follow_profile_btn">구독취소</button>
 							</c:when>
 							<c:otherwise>
-								<button class="cta" onclick="followOrUnFollow(${dto.user.id})">구독하기</button>
+								<button class="cta" onclick="followOrUnFollowProfile(${dto.user.id})" id="follow_profile_btn">구독하기</button>
 							</c:otherwise>
 						</c:choose>
 					</c:otherwise>
@@ -141,6 +141,7 @@
 	<!--팔로우 박스end-->
 </div>
 <!--팔로우 모달end-->
+
 
 <script src="/js/profile.js"></script>
 

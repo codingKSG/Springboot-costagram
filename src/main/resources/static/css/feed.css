@@ -70,8 +70,7 @@
 
 /* 게시물 이미지 박스*/
 .main .container .story-list .story-list__item .sl__item__img {
-  height: 600px;
-  min-height: 300px;
+  height: 100%;
 }
 
 /* 게시물 이미지*/

@@ -18,6 +18,7 @@ import com.cos.costargram.domain.comment.Comment;
 import com.cos.costargram.domain.likes.Likes;
 import com.cos.costargram.domain.tag.Tag;
 import com.cos.costargram.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

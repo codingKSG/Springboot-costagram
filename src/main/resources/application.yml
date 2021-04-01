@@ -35,6 +35,12 @@ spring:
     user:
       name: test
       password: 1234   
+      
+    oauth2:      client:        registration:          facebook:
+            client-id: 488882302300209
+            client-secret: 0e1b93e933b8640869b901ec9d6e7abd
+            scope:            - email
+            - public_profile
 
 file:
   path: C:\Programing\workspace\JpaBlog\Springboot-costagram\src\main\resources\upload\

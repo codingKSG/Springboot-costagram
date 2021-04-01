@@ -2,21 +2,41 @@ package com.cos.costargram.config.auth;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import com.cos.costargram.domain.user.User;
 
 import lombok.Data;
 
 @Data
-public class PrincipalDetails implements UserDetails{
+public class PrincipalDetails implements UserDetails,OAuth2User{
 
 	private User user;
+	private Map<String, Object> attributes;
+	private boolean isOAuth;
 	
 	public PrincipalDetails(User user) {
 		this.user = user;
+	}
+	
+	public PrincipalDetails(User user, Map<String, Object> attributes) {
+		this.user = user;
+		this.attributes = attributes;
+		this.isOAuth = true;
+	}
+	
+	@Override
+	public Map<String, Object> getAttributes() {
+		return attributes;
+	}
+		
+	@Override
+	public String getName() {
+		return "";
 	}
 
 	@Override
@@ -64,5 +84,6 @@ public class PrincipalDetails implements UserDetails{
 		collecters.add(()-> "ROLE_"+user.getRole());
 		return collecters;
 	}
+
 	
 }

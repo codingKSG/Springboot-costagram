@@ -35,7 +35,22 @@ public class ImageService {
 		// 2. SELECT * FROM image WHERE userId IN (SELECT toUserId FROM follow WHERE fromUserId = :principalId)
 		//     SELECT i.* FROM image i INNER JOIN follow f ON f.toUserId = i.userId WHERE f.fromUserId = :principalId
 		
-		return imageRepository.feedImages(principalId);
+		List<Image> images = imageRepository.feedImages(principalId);
+		
+		// 좋아요 하트 색깔 로직
+		images.forEach((image)->{
+			
+			int likeCount = image.getLikes().size();
+			image.setLikeCount(likeCount);
+			
+			image.getLikes().forEach((like)->{
+				if(like.getUser().getId() == principalId) {
+					image.setLikeState(true);
+				}
+			});
+		});
+		
+		return images;
 	}
 	
 	@Transactional

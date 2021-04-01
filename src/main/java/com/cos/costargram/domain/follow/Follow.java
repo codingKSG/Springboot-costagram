@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -24,22 +26,24 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 @Entity
+@Table(name = "follow", uniqueConstraints = {
+		@UniqueConstraint(name = "follow_uk", columnNames = { "fromUserId", "toUserId" }) })
 public class Follow {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@JsonIgnoreProperties({"images"})
-	@JoinColumn(name="fromUserId")
+
+	@JsonIgnoreProperties({ "images" })
+	@JoinColumn(name = "fromUserId")
 	@ManyToOne
 	private User fromUser; // ~~로 부터
-	
-	@JsonIgnoreProperties({"images"})
-	@JoinColumn(name="toUserId")
+
+	@JsonIgnoreProperties({ "images" })
+	@JoinColumn(name = "toUserId")
 	@ManyToOne
 	private User toUser; // ~~를
-	
+
 	@CreationTimestamp
 	private Timestamp createDate;
 
