@@ -3,9 +3,14 @@ package com.cos.costargram.service;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import org.qlrm.mapper.JpaResultMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +21,7 @@ import com.cos.costargram.domain.image.ImageRepository;
 import com.cos.costargram.domain.tag.Tag;
 import com.cos.costargram.domain.tag.TagRepository;
 import com.cos.costargram.utils.TagUtils;
+import com.cos.costargram.web.dto.image.ExploreReqDto;
 import com.cos.costargram.web.dto.image.ImageReqDto;
 
 import lombok.RequiredArgsConstructor;
@@ -26,6 +32,7 @@ public class ImageService {
 
 	private final ImageRepository imageRepository;
 	private final TagRepository tagRepository;
+	private final EntityManager em;
 	
 	@Value("${file.path}") // application.yml에 적혀있는 경로를 가져옴 
 	private String uploadFolder;
@@ -79,5 +86,25 @@ public class ImageService {
 		List<Tag> tags = TagUtils.parsingToTagObject(imageReqDto.getTags(), imageEntity);
 		tagRepository.saveAll(tags);
 		
+	}
+	
+	@Transactional(readOnly = true)
+	public List<ExploreReqDto> 인기사진(int principalId) {
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("SELECT i.postImageUrl, i.userId ");
+		sb.append("from likes l INNER JOIN image i ");
+		sb.append("ON l.imageId = i.id ");
+		sb.append("WHERE i.userId != ? ");
+		sb.append("GROUP BY imageId ORDER BY COUNT(l.imageId) DESC");
+		
+		Query query = em.createNativeQuery(sb.toString())
+				.setParameter(1, principalId);
+		
+		JpaResultMapper result = new JpaResultMapper();
+		
+		List<ExploreReqDto> exploreImagesEntity = result.list(query, ExploreReqDto.class);
+		
+		return exploreImagesEntity;
 	}
 }

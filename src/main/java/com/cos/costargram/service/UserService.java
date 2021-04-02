@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,7 @@ public class UserService {
 
 	private final UserRepository userRepository;
 	private final FollowRepository followRepository;
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Transactional(readOnly = true)
 	public UserProfileReqDto 회원프로필(int userId, int principalId) {
@@ -44,6 +46,31 @@ public class UserService {
 		userProfileReqDto.setUser(userEntity);
 
 		return userProfileReqDto;
+	}
+	
+	public User 회원정보(int id) {
+		return userRepository.findById(id).get();
+	}
+	
+	@Transactional
+	public User 회원수정(int id, User user) {
+		User userEntity = userRepository.findById(id).get();
+		
+		userEntity.setName(user.getName());
+		userEntity.setBio(user.getBio());
+		userEntity.setWebsite(user.getWebsite());
+		userEntity.setEmail(user.getEmail());
+		userEntity.setPhone(user.getPhone());
+		userEntity.setGender(user.getGender());
+		
+		if (!(user.getPassword().isEmpty())) {
+			String encPassword = bCryptPasswordEncoder.encode(user.getPassword());
+			userEntity.setPassword(encPassword);
+		}
+		
+		userRepository.save(userEntity);
+		
+		return userEntity;
 	}
 	
 }

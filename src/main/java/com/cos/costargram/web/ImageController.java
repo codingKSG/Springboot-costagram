@@ -16,6 +16,7 @@ import com.cos.costargram.domain.image.Image;
 import com.cos.costargram.service.ImageService;
 import com.cos.costargram.service.LikeService;
 import com.cos.costargram.web.dto.CMRespDto;
+import com.cos.costargram.web.dto.image.ExploreReqDto;
 import com.cos.costargram.web.dto.image.ImageReqDto;
 
 import lombok.RequiredArgsConstructor;
@@ -39,7 +40,11 @@ public class ImageController {
 	}
 	
 	@GetMapping("/image/explore")
-	public String explore() {
+	public String explore(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
+		List<ExploreReqDto> exploreImageDtos = imageService.인기사진(principalDetails.getUser().getId());
+		
+		model.addAttribute("dtos", exploreImageDtos);
+		
 		return "image/explore";
 	}
 	
@@ -69,5 +74,4 @@ public class ImageController {
 		return new CMRespDto<>(1, null);
 	}
 	
-
 }
