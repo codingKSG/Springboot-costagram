@@ -14,6 +14,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import com.cos.costargram.domain.image.Image;
 import com.cos.costargram.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,6 +39,7 @@ public class Comment {
 	@JoinColumn(name = "imageId")
 	private Image image;
 	
+	@JsonIgnoreProperties({"image"})
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User user;

@@ -3,7 +3,6 @@ package com.cos.costargram.service;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,6 +11,8 @@ import javax.persistence.Query;
 
 import org.qlrm.mapper.JpaResultMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,12 +38,13 @@ public class ImageService {
 	@Value("${file.path}") // application.yml에 적혀있는 경로를 가져옴 
 	private String uploadFolder;
 	
-	public List<Image> 피드이미지(int principalId) {
+	@Transactional(readOnly = true)
+	public Page<Image> 피드이미지(int principalId, Pageable pageable) {
 		// 1. principalId로 내가 팔로우하고 있는 사용자를 찾아야됨.(한개이거나 컬렉션이거나)
 		// 2. SELECT * FROM image WHERE userId IN (SELECT toUserId FROM follow WHERE fromUserId = :principalId)
 		//     SELECT i.* FROM image i INNER JOIN follow f ON f.toUserId = i.userId WHERE f.fromUserId = :principalId
 		
-		List<Image> images = imageRepository.feedImages(principalId);
+		Page<Image> images = imageRepository.feedImages(principalId, pageable);
 		
 		// 좋아요 하트 색깔 로직
 		images.forEach((image)->{

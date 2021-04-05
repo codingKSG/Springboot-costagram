@@ -39,17 +39,21 @@ public class Image {
 	private String caption; // 작성자의 글
 	private String postImageUrl;
 	
+	@JsonIgnoreProperties({"images"})
 	@ManyToOne
 	@JoinColumn(name="userId")
 	private User user;
 	
+	@JsonIgnoreProperties({"image"})
 	@OneToMany(mappedBy="image")
 	private List<Tag> tags;
 	
+	@JsonIgnoreProperties({"image"})
 	@OneToMany(mappedBy = "image")
 	private List<Likes> likes;
 	
 	// comment(댓글)
+	@JsonIgnoreProperties({"image"})
 	@OneToMany(mappedBy = "image")
 	private List<Comment> comment;
 	

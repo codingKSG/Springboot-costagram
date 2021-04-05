@@ -50,6 +50,7 @@ public class User {
 	
 	private String role; // USER, ADMIN
 	
+	
 	@OneToMany(mappedBy = "user")
 	private List<Image> images;
 	

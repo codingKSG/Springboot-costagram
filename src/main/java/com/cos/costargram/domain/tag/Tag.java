@@ -32,6 +32,7 @@ public class Tag {
 	
 	private String name;
 	
+	@JsonIgnoreProperties({"image"})
 	@ManyToOne
 	@JoinColumn(name="imageId")
 	private Image image;
