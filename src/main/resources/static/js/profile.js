@@ -1,20 +1,16 @@
-
-document.querySelector("#subscribeBtn").onclick = (e) => {
+// 구독자 정보  모달 보기
+$("#subscribe_btn").on("click", (e) => {
 	e.preventDefault();
-	document.querySelector(".modal-follow").style.display = "flex";
-
+	$(".modal-follow").css("display", "flex");
+	
 	//ajax 통신후에 json 리턴 -> javascript 오브젝트 변경 => for문 돌면서 뿌리기
 
 	let userId = $("#userId").val();
 
 	$.ajax({
-		type: "GET",
 		url: `/user/${userId}/follow`,
-		dataType: "JSON"
 	}).done((res) => {
-
 		$("#follow_list").empty();
-
 		res.data.forEach((u) => {
 			console.log(u);
 			let item = makeSubScriveInfo(u);
@@ -24,7 +20,7 @@ document.querySelector("#subscribeBtn").onclick = (e) => {
 	}).fail((error) => {
 		alert("오류: ", +error);
 	});
-};
+});
 
 function makeSubScriveInfo(u) {
 	let item = `<div class="follower__item" id="follow-${u.userId}">`;

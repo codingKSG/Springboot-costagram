@@ -39,7 +39,7 @@ public class Comment {
 	@JoinColumn(name = "imageId")
 	private Image image;
 	
-	@JsonIgnoreProperties({"image"})
+	@JsonIgnoreProperties({"images"})
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User user;

@@ -13,10 +13,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cos.costargram.config.auth.PrincipalDetails;
+import com.cos.costargram.domain.comment.Comment;
 import com.cos.costargram.domain.image.Image;
+import com.cos.costargram.service.CommentService;
 import com.cos.costargram.service.ImageService;
 import com.cos.costargram.service.LikeService;
 import com.cos.costargram.web.dto.CMRespDto;
@@ -32,21 +35,21 @@ public class ImageController {
 
 	private final ImageService imageService;
 	private final LikeService likeService;
+	private final CommentService commentService;
 
 	@GetMapping({ "/", "/image/feed" })
 	public String feed() {
 
 		return "image/feed";
 	}
-	
+
 	@GetMapping("/image")
 	public @ResponseBody CMRespDto<?> image(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails,
 			@PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
 
-		Page<Image> images = imageService.피드이미지(principalDetails.getUser().getId(), pageable);
+		Page<Image> pages = imageService.피드이미지(principalDetails.getUser().getId(), pageable);
 
-
-		return new CMRespDto<>(1, images);
+		return new CMRespDto<>(1, pages);
 	}
 
 	@GetMapping("/image/explore")
@@ -84,6 +87,14 @@ public class ImageController {
 		likeService.싫어요(imageId, principalDetails.getUser().getId());
 
 		return new CMRespDto<>(1, null);
+	}
+
+	@PostMapping("/image/{imageId}/comment")
+	public @ResponseBody CMRespDto<?> save(@PathVariable int imageId, @RequestBody String content,
+			@AuthenticationPrincipal PrincipalDetails principalDetails) { // content, imageId, userId(세션)
+		Comment commentEntity = commentService.댓글쓰기(principalDetails.getUser(), content, imageId);
+
+		return new CMRespDto<>(1, commentEntity);
 	}
 
 }

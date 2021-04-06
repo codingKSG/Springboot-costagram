@@ -54,7 +54,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="" id="subscribeBtn">
+						<a href="" id="subscribe_btn">
 							<input type="hidden" id="userId" value="${dto.user.id}" />
 							구독정보
 							<span>${dto.followCount}</span>
