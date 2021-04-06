@@ -14,6 +14,7 @@ import javax.persistence.OrderBy;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.web.PageableDefault;
 
 import com.cos.costargram.domain.comment.Comment;
 import com.cos.costargram.domain.likes.Likes;
